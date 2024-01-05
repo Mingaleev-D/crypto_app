@@ -1,5 +1,4 @@
 import 'package:crypto_app/ui/providers/theme_provider.dart';
-import 'package:crypto_app/ui/widgets/theme_switcher.dart';
 import 'package:crypto_app/ui/widgets/main_pager_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,18 +38,11 @@ class _MyAppState extends State<MyApp> {
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
           debugShowCheckedModeBanner: false,
-          home: Directionality(
+          home: const Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.greenAccent[700],
-                centerTitle: true,
-                actions: const [
-                  ThemeSwitcher(),
-                ],
-                title: const Text("Crypto"),
-              ),
-              body: const MainPagerWidget(),
+              extendBody: true,
+              body: MainPagerWidget(),
             ),
           ),
         );
