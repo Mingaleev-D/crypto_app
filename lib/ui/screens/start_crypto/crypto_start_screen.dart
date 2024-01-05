@@ -1,6 +1,8 @@
 import 'package:crypto_app/ui/ui_helpers/app_constants.dart';
 import 'package:crypto_app/ui/widgets/theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:marquee/marquee.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../widgets/home_page_widgets.dart';
@@ -16,8 +18,16 @@ class _CryptoStartScreenState extends State<CryptoStartScreen> {
   final PageController _pageViewController = PageController(
     initialPage: 0,
   );
+  var defaultChoiceIndex = 0;
+  final List<String> _choicesList = [
+    'Top MarketCaps',
+    'Top Gainers',
+    'Top Losers',
+  ];
+
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstants.appBacground,
@@ -65,6 +75,77 @@ class _CryptoStartScreenState extends State<CryptoStartScreen> {
                     ),
                   ),
                 ),
+                const Gap(5),
+                SizedBox(
+                  height: 30,
+                  width: double.infinity,
+                  child: Marquee(
+                    text: '🔊 this is place for news in application ',
+                    style: textTheme.bodySmall,
+                  ),
+                ),
+                const Gap(10),
+                //ButtonClicker
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: AppConstants.appBacground,
+                            backgroundColor: Colors.green.shade300),
+                        onPressed: () {},
+                        child: Text(
+                          'buy',
+                          style: textTheme.bodyMedium?.copyWith(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                      const Gap(10),
+                      Expanded(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  foregroundColor: AppConstants.appBacground,
+                                  backgroundColor: Colors.redAccent.shade200),
+                              onPressed: () {},
+                              child: Text(
+                                'sell',
+                                style: textTheme.bodyMedium?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ))),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                  child: Row(
+                    children: [
+                      Wrap(
+                          spacing: 8,
+                          children: List.generate(
+                            _choicesList.length,
+                            (index) {
+                              return ChoiceChip(
+                                label: Text(_choicesList[index],
+                                    style: textTheme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.bold)),
+                                selected: defaultChoiceIndex == index,
+                                selectedColor: Colors.blueAccent,
+                                onSelected: (value) {
+                                  setState(() {
+                                    defaultChoiceIndex =
+                                        value ? index : defaultChoiceIndex;
+                                  });
+                                },
+                              );
+                            },
+                          )),
+                    ],
+                  ),
+                )
               ],
             ),
           )),

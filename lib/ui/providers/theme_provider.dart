@@ -51,9 +51,9 @@ class MyThemes {
         titleSmall: GoogleFonts.nunitoSans(color: Colors.black, fontSize: 12),
       ),
       // unselectedWidgetColor: Colors.black,
-      // primaryColorLight: Colors.white,
+      primaryColorLight: const Color(0xffb9d0f6ff),
       // scaffoldBackgroundColor: Colors.white,
-      // primaryColor: Colors.greenAccent[700],
+      primaryColor: const Color(0xffb9d0f6ff),
       // secondaryHeaderColor: Colors.black,
       // iconTheme: const IconThemeData(color: Colors.white, opacity: 0.8),
       colorScheme: const ColorScheme.light());
